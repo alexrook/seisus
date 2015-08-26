@@ -62,7 +62,7 @@ public class Frequency implements Serializable {
     @Id
     FrequencyPK pk;
 
-    @Column(insertable = false, updatable = false)
+    @Column(name="nodeLabel",insertable = false, updatable = false)
     String nodeLabel;
     
     
