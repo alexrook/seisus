@@ -1,21 +1,26 @@
-
 package seisus.model;
 
 import java.io.Serializable;
 import javax.persistence.*;
-import seisus.model.Frequency.FrequencyPK;
+
 /**
  * @author moroz
  */
-@Entity 
+@Entity
 public class XDirectionVector implements Serializable {
-    
+
     private static final long serialVersionUID = 1L;
-    
+
     @Id
-    FrequencyPK id;
-    
-    double accel05,accel02,accel01;
+    @ManyToOne
+    @JoinColumns({
+        @JoinColumn(name = "frequencyVal", referencedColumnName = "val"),
+        @JoinColumn(name = "nodeLabel", referencedColumnName = "nodeLabel"),
+        @JoinColumn(name = "projectId", referencedColumnName = "projectId")
+    })
+    Frequency pk;
+
+    double accel05, accel02, accel01;
 
     public double getAccel05() {
         return accel05;
@@ -40,11 +45,11 @@ public class XDirectionVector implements Serializable {
     public void setAccel01(double accel01) {
         this.accel01 = accel01;
     }
-   
 
     @Override
     public String toString() {
-        return "seisus.model.XDirectionVector[ frequency=" +id.getVal()+ ", node="+id.getNodeLabel()+"  ]";
+        return "seisus.model.XDirectionVector[ frequency=" +pk.getPk().getVal()  +
+                                                ", node=" + pk.getLabel().getPk().getLabel() + "  ]";
     }
-    
+
 }

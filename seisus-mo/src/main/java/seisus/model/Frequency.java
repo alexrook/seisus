@@ -60,19 +60,25 @@ public class Frequency implements Serializable {
     }
 
     @Id
-    FrequencyPK id;
+    FrequencyPK pk;
 
+    @Id
     @ManyToOne
-    @JoinColumn(name = "nodeLabel")
+    @JoinColumns({
+        @JoinColumn(name="nodeLabel",referencedColumnName = "label"),
+        @JoinColumn(name="projectId",referencedColumnName = "projectId")
+    })
     NodeLabel label;
 
-    public FrequencyPK getId() {
-        return id;
+    public FrequencyPK getPk() {
+        return pk;
     }
 
-    public void setId(FrequencyPK id) {
-        this.id = id;
+    public void setPk(FrequencyPK pk) {
+        this.pk = pk;
     }
+
+    
 
     public NodeLabel getLabel() {
         return label;
@@ -86,7 +92,7 @@ public class Frequency implements Serializable {
 
     @Override
     public String toString() {
-        return "seisus.model.Frequency[ node=" + label.getId().label + ", value=" + id.val + " ]";
+        return "seisus.model.Frequency[ node=" + label.getPk().getLabel() + ", value=" + pk.getVal() + " ]";
     }
 
 }
