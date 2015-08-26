@@ -17,6 +17,16 @@ public class Frequency implements Serializable {
 
         Double val;
         String nodeLabel;
+        Long projectId;
+
+        public Long getProjectId() {
+            return projectId;
+        }
+
+        public void setProjectId(Long projectId) {
+            this.projectId = projectId;
+        }
+        
 
         public Double getVal() {
             return val;
@@ -66,7 +76,7 @@ public class Frequency implements Serializable {
     @ManyToOne
     @JoinColumns({
         @JoinColumn(name="nodeLabel",referencedColumnName = "label",insertable = false,updatable = false),
-        @JoinColumn(name="projectId",referencedColumnName = "projectId")
+        @JoinColumn(name="projectId",referencedColumnName = "projectId",insertable = false,updatable = false)
     })
     NodeLabel label;
 
