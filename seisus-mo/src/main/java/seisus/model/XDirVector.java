@@ -10,13 +10,14 @@ import javax.persistence.*;
 public class XDirVector implements Serializable {
 
     private static final long serialVersionUID = 1L;
-
+    
+    
     @Id
     @ManyToOne
     @JoinColumns({
-        @JoinColumn(name = "node", referencedColumnName = "nodeLabel", insertable = false, updatable = false),
-        @JoinColumn(name = "projectId", referencedColumnName = "projectId", insertable = false, updatable = false),
-        @JoinColumn(name = "frequency", referencedColumnName = "val", insertable = false, updatable = false)
+        @JoinColumn(name = "node", referencedColumnName = "nodeLabel"),
+        @JoinColumn(name = "projectId", referencedColumnName = "projectId"),
+        @JoinColumn(name = "frequency", referencedColumnName = "val")
     })
     private Frequency frequency;
 
