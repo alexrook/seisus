@@ -1,0 +1,6 @@
+target/
+*komodo*
+deployments
+local*
+*.json
+
