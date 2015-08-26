@@ -56,11 +56,14 @@ public class NodeLabel implements Serializable {
             }
             return Objects.equals(this.label, other.label);
         }
-        
+
     }
 
     @Id
     private NodeLabelPK pk;
+
+    @Column(insertable = false, updatable = false)
+    Long projectId;
 
     @ManyToOne
     @JoinColumn(name = "projectId")
