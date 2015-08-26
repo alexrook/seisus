@@ -23,6 +23,12 @@
             <artifactId>javaee-api</artifactId>
             <scope>provided</scope>
         </dependency>
+        
+         <dependency>
+            <groupId>seisus</groupId>
+            <artifactId>seisus-mo</artifactId>
+        </dependency>
+        
     </dependencies>
 
 <profiles>
