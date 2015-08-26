@@ -63,11 +63,8 @@ public class NodeLabel implements Serializable {
     
     private NodeLabelPK pk;
 
-    @Column(name = "projectId",insertable = false, updatable = false)
-    Long projectId;
-
     @ManyToOne
-    @JoinColumn(name = "projectId")
+    @JoinColumn(name = "projectId",insertable = false,updatable = false)
     Project project;
 
     public NodeLabelPK getPk() {
