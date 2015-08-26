@@ -2,6 +2,6 @@
 Seismic Survey
 ===
 
-Seismic calculator for mu company
+Seismic calculator for my company
 
 
