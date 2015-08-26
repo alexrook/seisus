@@ -4,7 +4,6 @@ import java.io.Serializable;
 import java.util.Objects;
 import javax.persistence.*;
 
-
 /**
  * @author moroz
  */
@@ -34,7 +33,6 @@ public class Frequency implements Serializable {
         public void setNodeLabel(String nodeLabel) {
             this.nodeLabel = nodeLabel;
         }
-        
 
         @Override
         public int hashCode() {
@@ -59,15 +57,14 @@ public class Frequency implements Serializable {
             return Objects.equals(this.nodeLabel, other.nodeLabel);
         }
 
-       
     }
 
     @Id
     FrequencyPK id;
-    
+
     @ManyToOne
     @JoinColumn(name = "nodeLabel")
-    String label;
+    NodeLabel label;
 
     public FrequencyPK getId() {
         return id;
@@ -77,19 +74,19 @@ public class Frequency implements Serializable {
         this.id = id;
     }
 
-    public String getLabel() {
+    public NodeLabel getLabel() {
         return label;
     }
 
-    public void setLabel(String label) {
+    public void setLabel(NodeLabel label) {
         this.label = label;
     }
 
-  
+    
 
     @Override
     public String toString() {
-        return "seisus.model.Frequency[ node=" + label + ", value=" + id.val + " ]";
+        return "seisus.model.Frequency[ node=" + label.getId().label + ", value=" + id.val + " ]";
     }
 
 }

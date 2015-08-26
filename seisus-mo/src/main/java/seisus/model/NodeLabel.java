@@ -22,12 +22,30 @@ public class NodeLabel implements Serializable {
     
     @ManyToOne
     @JoinColumn(name = "projectId")
-    Long projectId;
+    Project project;
+
+    public NodeLabelPK getId() {
+        return id;
+    }
+
+    public void setId(NodeLabelPK id) {
+        this.id = id;
+    }
+
+    public Project getProject() {
+        return project;
+    }
+
+    public void setProject(Project project) {
+        this.project = project;
+    }
+
+    
     
 
     @Override
     public String toString() {
-        return "seisus.model.NodeLabel[ projectId=" +projectId + ", label="+id.label+" ]";
+        return "seisus.model.NodeLabel[ projectId=" +project.getId() + ", label="+id.label+" ]";
     }
 
 }
