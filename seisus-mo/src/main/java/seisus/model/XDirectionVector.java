@@ -13,11 +13,6 @@ public class XDirectionVector implements Serializable {
 
     @Id
     @ManyToOne
-    @JoinColumns({
-        @JoinColumn(name = "frequencyVal", referencedColumnName = "val"),
-        @JoinColumn(name = "nodeLabel", referencedColumnName = "nodeLabel"),
-        @JoinColumn(name = "projectId", referencedColumnName = "projectId")
-    })
     Frequency pk;
 
     double accel05, accel02, accel01;
