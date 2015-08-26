@@ -62,14 +62,10 @@ public class Frequency implements Serializable {
     @Id
     FrequencyPK pk;
 
-    @Column(name="nodeLabel",insertable = false, updatable = false)
-    String nodeLabel;
-    
-    
     @Id
     @ManyToOne
     @JoinColumns({
-        @JoinColumn(name="nodeLabel",referencedColumnName = "label"),
+        @JoinColumn(name="nodeLabel",referencedColumnName = "label",insertable = false,updatable = false),
         @JoinColumn(name="projectId",referencedColumnName = "projectId")
     })
     NodeLabel label;

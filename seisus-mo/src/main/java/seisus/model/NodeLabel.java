@@ -60,7 +60,6 @@ public class NodeLabel implements Serializable {
     }
 
     @Id
-    
     private NodeLabelPK pk;
 
     @ManyToOne
