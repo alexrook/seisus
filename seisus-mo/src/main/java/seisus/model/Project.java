@@ -1,6 +1,7 @@
 package seisus.model;
 
 import java.io.Serializable;
+import java.util.Objects;
 import javax.persistence.*;
 
 /**
@@ -18,6 +19,17 @@ public class Project implements Serializable {
     private String name,
             description;
 
+    public Project() {
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
     public String getName() {
         return name;
     }
@@ -33,40 +45,36 @@ public class Project implements Serializable {
     public void setDescription(String description) {
         this.description = description;
     }
-    
-    
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
 
     @Override
     public int hashCode() {
-        int hash = 0;
-        hash += (id != null ? id.hashCode() : 0);
+        int hash = 7;
+        hash = 59 * hash + Objects.hashCode(this.id);
+        hash = 59 * hash + Objects.hashCode(this.name);
+        hash = 59 * hash + Objects.hashCode(this.description);
         return hash;
     }
 
     @Override
-    public boolean equals(Object object) {
-        // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Project)) {
+    public boolean equals(Object obj) {
+        if (obj == null) {
             return false;
         }
-        Project other = (Project) object;
-        if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
+        if (getClass() != obj.getClass()) {
             return false;
         }
-        return true;
+        final Project other = (Project) obj;
+        if (!Objects.equals(this.id, other.id)) {
+            return false;
+        }
+        if (!Objects.equals(this.name, other.name)) {
+            return false;
+        }
+        return Objects.equals(this.description, other.description);
     }
 
-    @Override
-    public String toString() {
-        return "seisus.model.Project[ id=" + id + " , name=" + name + " ]";
-    }
-
+    
+   
+  
+    
 }

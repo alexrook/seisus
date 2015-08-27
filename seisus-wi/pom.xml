@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" 
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
     <parent>
@@ -32,20 +34,40 @@
     </dependencies>
 
     <profiles>
-        <!--
+        
         <profile>
             <id>btw</id>
             <build>
+                
+                <filters>
+                    <filter>local.properties</filter>
+                </filters>
+              
+                <finalName>seisus-btw</finalName>
+               
                 <plugins>
+                    
+                    <plugin>
+                        <artifactId>maven-war-plugin</artifactId>
+                        <configuration>
+                            <webResources>
+                                <resource>
+                                    <directory>src/btw/resources</directory> 
+                                    <filtering>true</filtering>
+                                </resource>   
+                            </webResources>
+                        </configuration>
+                    </plugin>
+
                     <plugin>
                         <groupId>org.wildfly.plugins</groupId>
                         <artifactId>wildfly-maven-plugin</artifactId>
-                        <version></version>
                     </plugin>
+                    
                 </plugins>
             </build>
         </profile>
-        -->
+        
         <profile>
             <!-- When built in OpenShift the 'openshift' profile will be used when invoking mvn. -->
             <!-- Use this profile for any OpenShift specific customization your app will need. -->

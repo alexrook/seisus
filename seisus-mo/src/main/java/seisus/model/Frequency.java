@@ -12,83 +12,33 @@ public class Frequency implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
-    @Embeddable
-    public class FrequencyPK implements Serializable {
-
-        Double val;
-        String nodeLabel;
-        Long projectId;
-
-        public Long getProjectId() {
-            return projectId;
-        }
-
-        public void setProjectId(Long projectId) {
-            this.projectId = projectId;
-        }
-        
-
-        public Double getVal() {
-            return val;
-        }
-
-        public void setVal(Double val) {
-            this.val = val;
-        }
-
-        public String getNodeLabel() {
-            return nodeLabel;
-        }
-
-        public void setNodeLabel(String nodeLabel) {
-            this.nodeLabel = nodeLabel;
-        }
-
-        @Override
-        public int hashCode() {
-            int hash = 7;
-            hash = 97 * hash + Objects.hashCode(this.val);
-            hash = 97 * hash + Objects.hashCode(this.nodeLabel);
-            return hash;
-        }
-
-        @Override
-        public boolean equals(Object obj) {
-            if (obj == null) {
-                return false;
-            }
-            if (getClass() != obj.getClass()) {
-                return false;
-            }
-            final FrequencyPK other = (FrequencyPK) obj;
-            if (!Objects.equals(this.val, other.val)) {
-                return false;
-            }
-            return Objects.equals(this.nodeLabel, other.nodeLabel);
-        }
-
-    }
-
     @Id
-    FrequencyPK pk;
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    Long id;
 
-    @Id
+    Double val;
+    
     @ManyToOne
-    @JoinColumns({
-        @JoinColumn(name="nodeLabel",referencedColumnName = "label",insertable = false,updatable = false),
-        @JoinColumn(name="projectId",referencedColumnName = "projectId",insertable = false,updatable = false)
-    })
     NodeLabel label;
 
-    public FrequencyPK getPk() {
-        return pk;
+    public Frequency() {
     }
 
-    public void setPk(FrequencyPK pk) {
-        this.pk = pk;
+    public Long getId() {
+        return id;
     }
 
-    
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public Double getVal() {
+        return val;
+    }
+
+    public void setVal(Double val) {
+        this.val = val;
+    }
 
     public NodeLabel getLabel() {
         return label;
@@ -98,11 +48,33 @@ public class Frequency implements Serializable {
         this.label = label;
     }
 
-    
+    @Override
+    public int hashCode() {
+        int hash = 5;
+        hash = 37 * hash + Objects.hashCode(this.id);
+        hash = 37 * hash + Objects.hashCode(this.val);
+        hash = 37 * hash + Objects.hashCode(this.label);
+        return hash;
+    }
 
     @Override
-    public String toString() {
-        return "seisus.model.Frequency[ node=" + label.getPk().getLabel() + ", value=" + pk.getVal() + " ]";
+    public boolean equals(Object obj) {
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final Frequency other = (Frequency) obj;
+        if (!Objects.equals(this.id, other.id)) {
+            return false;
+        }
+        if (!Objects.equals(this.val, other.val)) {
+            return false;
+        }
+        return Objects.equals(this.label, other.label);
     }
+    
+    
 
 }
