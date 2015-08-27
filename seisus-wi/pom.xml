@@ -31,6 +31,12 @@
             <artifactId>seisus-mo</artifactId>
         </dependency>
         
+        <dependency>
+            <groupId>seisus</groupId>
+            <artifactId>seisus-se</artifactId>
+            <type>ejb</type>
+        </dependency>
+        
     </dependencies>
 
     <profiles>

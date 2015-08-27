@@ -9,17 +9,17 @@
         <version>1.0-SNAPSHOT</version>
     </parent>
 
-    <artifactId>seisus-mo</artifactId>
+    <artifactId>seisus-li</artifactId>
 
-    <name>seisus-mo</name>
-    
+    <name>seisus-li</name>
     <dependencies>
+        
         <dependency>
-            <groupId>org.eclipse.persistence</groupId>
-            <artifactId>javax.persistence</artifactId>
-            <version>2.1.0</version>
-            <scope>provided</scope>
+            <groupId>seisus</groupId>
+            <artifactId>seisus-mo</artifactId>
         </dependency>
+
+        
     </dependencies>
 
 </project>

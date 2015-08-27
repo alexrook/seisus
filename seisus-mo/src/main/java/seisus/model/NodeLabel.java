@@ -19,7 +19,7 @@ public class NodeLabel implements Serializable {
     @Column(length = 25)
     String label;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.REMOVE)
     Project project;
 
     public NodeLabel() {
