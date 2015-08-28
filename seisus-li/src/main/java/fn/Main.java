@@ -66,7 +66,7 @@ public class Main implements FilenameFilter {
     }
     
     public void showVersion() {
-        System.out.println("seisus version: fn-v0.01");
+        System.out.println("seisus version: fn-v0.02");
     }
     
     public void showUsage() {

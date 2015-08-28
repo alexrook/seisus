@@ -7,31 +7,12 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.text.NumberFormat;
 import java.text.ParseException;
-import java.util.Locale;
 
 /**
  * @author moroz
  */
 public class VectorParser {
 
-    public static void main(String[] args) {
-        System.out.println(Locale.getDefault().getDisplayName());
-        NumberFormat numberForm = NumberFormat.getInstance();
-        //numberForm.setMaximumFractionDigits(34);
-        //numberForm.setMinimumFractionDigits(1);
-        Number n1 = null, n2 = null, n3 = null;
-        try {
-            n1 = numberForm.parse("123,3456771234567890");
-            n2 = numberForm.parse("123");
-            n3 = numberForm.parse("123,1");
-
-        } catch (ParseException ex) {
-            ex.printStackTrace();
-        }
-        System.out.println(n1.doubleValue());
-        System.out.println(n2.floatValue());
-        System.out.println(n3.floatValue());
-    }
 
     public enum VectorType {
         X, Y, Z

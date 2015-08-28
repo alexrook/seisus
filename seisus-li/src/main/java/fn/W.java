@@ -81,7 +81,7 @@ public class W {
                 w.append(vectors[1].toString());
                 w.append("\t");
                 w.append(vectors[2].toString());
-                w.append("\n");
+                w.append(System.lineSeparator());
                 i++;
             }
         }
