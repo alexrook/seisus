@@ -21,4 +21,9 @@ public class ProjectFacade extends AbstractFacade<Project> {
         super(Project.class);
     }
 
+    Project getProjectByName(String name) {
+        return em.createNamedQuery(name, Project.class)
+                    .setParameter("name", name).getSingleResult();
+    }
+
 }

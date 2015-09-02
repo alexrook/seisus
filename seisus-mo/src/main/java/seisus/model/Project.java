@@ -1,6 +1,7 @@
 package seisus.model;
 
 import java.io.Serializable;
+import java.util.Collection;
 import java.util.Objects;
 import javax.persistence.*;
 
@@ -8,6 +9,11 @@ import javax.persistence.*;
  * @author moroz
  */
 @Entity
+@Table(uniqueConstraints = {
+    @UniqueConstraint(columnNames = {"name"})})
+@NamedQueries({
+    @NamedQuery(name = "Project.byName", query = "select a from Project a where a.name=:name")
+})
 public class Project implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -18,6 +24,9 @@ public class Project implements Serializable {
 
     private String name,
             description;
+
+    @OneToMany(mappedBy = "project", fetch = FetchType.LAZY)
+    private Collection<NodeLabel> nodes;
 
     public Project() {
     }
@@ -44,6 +53,14 @@ public class Project implements Serializable {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public Collection<NodeLabel> getNodes() {
+        return nodes;
+    }
+
+    public void setNodes(Collection<NodeLabel> nodes) {
+        this.nodes = nodes;
     }
 
     @Override
@@ -73,8 +90,4 @@ public class Project implements Serializable {
         return Objects.equals(this.description, other.description);
     }
 
-    
-   
-  
-    
 }

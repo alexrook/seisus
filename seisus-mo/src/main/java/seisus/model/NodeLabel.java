@@ -1,6 +1,7 @@
 package seisus.model;
 
 import java.io.Serializable;
+import java.util.Collection;
 import java.util.Objects;
 import javax.persistence.*;
 
@@ -22,6 +23,10 @@ public class NodeLabel implements Serializable {
     @ManyToOne(cascade = CascadeType.REMOVE)
     Project project;
 
+    
+    @OneToMany(mappedBy = "label",fetch = FetchType.LAZY)
+    private Collection<Frequency> frequencys;
+    
     public NodeLabel() {
     }
 
@@ -48,6 +53,16 @@ public class NodeLabel implements Serializable {
     public void setProject(Project project) {
         this.project = project;
     }
+
+    public Collection<Frequency> getFrequencys() {
+        return frequencys;
+    }
+
+    public void setFrequencys(Collection<Frequency> frequencys) {
+        this.frequencys = frequencys;
+    }
+    
+    
 
     @Override
     public int hashCode() {

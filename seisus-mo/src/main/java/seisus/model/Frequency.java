@@ -8,6 +8,9 @@ import javax.persistence.*;
  * @author moroz
  */
 @Entity
+@NamedQueries({
+    @NamedQuery(name = "Frequency.byValue", query = "select f from Frequency f where f.val=:val")
+})
 public class Frequency implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -17,7 +20,7 @@ public class Frequency implements Serializable {
     Long id;
 
     Double val;
-    
+
     @ManyToOne
     NodeLabel label;
 
@@ -74,7 +77,5 @@ public class Frequency implements Serializable {
         }
         return Objects.equals(this.label, other.label);
     }
-    
-    
 
 }
