@@ -3,4 +3,6 @@ target/
 deployments
 local*
 *.json
+nb-conf*
+
 
