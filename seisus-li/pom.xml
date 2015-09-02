@@ -23,8 +23,27 @@
     </dependencies>
     <profiles>
         <profile>
+
+            <id>openshift</id>
+
+            <build>
+                <plugins>
+                    <plugin>
+                        <artifactId>maven-compiler-plugin</artifactId>
+                        <configuration>
+                            <excludes>
+                                <!--exclude fast-needs code-->
+                                <exclude>fn/**/*.java</exclude>
+                            </excludes>
+                        </configuration>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+        <profile>
+
             <id>fast-needs</id>
-            
+
             <build>
                 <finalName>seisus</finalName>
                 <plugins>
@@ -32,6 +51,7 @@
                         <artifactId>maven-compiler-plugin</artifactId>
                         <configuration>
                             <excludes>
+                                <!--exclude main code-->
                                 <exclude>seisus/**/*.java</exclude>
                             </excludes>
                         </configuration>
