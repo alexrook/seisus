@@ -26,7 +26,7 @@
             <id>fast-needs</id>
             
             <build>
-                <finalName>seisus</finalName>
+                <finalName>seisus-map</finalName>
                 <plugins>
                     <plugin>
                         <artifactId>maven-compiler-plugin</artifactId>

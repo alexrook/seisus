@@ -13,7 +13,7 @@ public class W {
 
     private static W instance;
 
-    private final TreeMap<Double, Double[]> data;
+    private TreeMap<Double, Double[]> data;
 
     private W() {
         data = new TreeMap<>();
@@ -27,6 +27,14 @@ public class W {
             return instance;
         }
 
+    }
+
+    public TreeMap<Double, Double[]> getData() {
+        return data;
+    }
+
+    public void setData(TreeMap<Double, Double[]> data) {
+        this.data = data;
     }
 
     public void putX(Double frecuency, Double x) {
@@ -57,41 +65,6 @@ public class W {
         vectors[position] = val;
     }
 
-    public void write() throws IOException {
-
-        StringBuilder errors;
-        try (BufferedWriter w = new BufferedWriter(new FileWriter(new File("w.txt")))) {
-            errors = new StringBuilder();
-            int i = 1;
-            for (Double frecuency : data.keySet()) {
-                Double[] vectors = data.get(frecuency);
-                for (Double v : vectors) {
-                    if (v == null) {
-                        errors.append("WARN ! frecuency:")
-                                .append(frecuency)
-                                .append(" contains empty values(line in file:")
-                                .append(i)
-                                .append(")\n");
-                    }
-                }
-                w.append(frecuency.toString());
-                w.append("\t");
-                w.append(vectors[0].toString());
-                w.append("\t");
-                w.append(vectors[1].toString());
-                w.append("\t");
-                w.append(vectors[2].toString());
-                w.append(System.lineSeparator());
-                i++;
-            }
-        }
-
-        if (errors.length() > 0) {
-            try (FileWriter errorsf = new FileWriter("errors.txt")) {
-                errorsf.write(errors.toString());
-            }
-        }
-
-    }
+   
 
 }

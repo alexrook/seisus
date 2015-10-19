@@ -12,14 +12,16 @@
     <artifactId>seisus-mo</artifactId>
 
     <name>seisus-mo</name>
-    
+
     <dependencies>
+
         <dependency>
-            <groupId>org.eclipse.persistence</groupId>
-            <artifactId>javax.persistence</artifactId>
-            <version>2.1.0</version>
-            <scope>provided</scope>
-        </dependency>
+		<groupId>org.hibernate.javax.persistence</groupId>
+	        <artifactId>hibernate-jpa-2.0-api</artifactId>
+		<version>1.0.1.Final</version>
+	</dependency>
+
     </dependencies>
+
 
 </project>

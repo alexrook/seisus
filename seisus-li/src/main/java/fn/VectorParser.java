@@ -29,6 +29,7 @@ public class VectorParser {
         W w = W.getInstace();
 
         NumberFormat numberForm = NumberFormat.getInstance();
+        
         try (BufferedReader reader = new BufferedReader(new InputStreamReader(new FileInputStream(file)))) {
             String line = reader.readLine();
             int i = 1;
