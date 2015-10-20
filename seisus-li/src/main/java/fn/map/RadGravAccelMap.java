@@ -1,7 +1,6 @@
 package fn.map;
 
 import fn.Utils;
-import java.io.IOException;
 import java.util.TreeMap;
 
 /**
@@ -15,18 +14,16 @@ public class RadGravAccelMap extends BaseMap {
 
     private final TreeMap<Double, Double[]> data;
 
-    private static final String PRINTED_NAME = "rgam";
-
-    private final boolean isprint;
+    protected static final String PRINTED_NAME = "rgam";
 
     public RadGravAccelMap() {
         data = new TreeMap<>();
-        isprint = Utils.getBoolProperty(PRINTED_NAME + ".print");
+        print = Utils.getBoolProperty(PRINTED_NAME + ".print");
     }
 
     @Override
-    public boolean isPrint() {
-        return isprint;
+    public String getPrintedName() {
+        return PRINTED_NAME;
     }
 
     @Override
@@ -49,19 +46,8 @@ public class RadGravAccelMap extends BaseMap {
     }
 
     @Override
-    public String getPrintedName() {
-        return PRINTED_NAME;
-    }
-
-    @Override
     public String getDescription() {
         return "translated frecuency in radians, the values of the vectors - in a fraction of the gravitational acceleration";
-    }
-
-    @Override
-    public void write(String name) throws IOException {
-        name = name != null ? name : getPrintedName();
-        super.write(name);
     }
 
 }

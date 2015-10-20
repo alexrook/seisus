@@ -55,7 +55,7 @@ public class Main implements FilenameFilter {
         try {
 
             W wInst = W.getInstace();
-        
+
             for (Imap imap : MapFactory.getMaps()) {
                 imap.map(wInst.getData());
                 wInst.setData(imap.getData());
@@ -91,9 +91,9 @@ public class Main implements FilenameFilter {
         System.out.println("\t\tresult is placed in the file w.txt");
         System.out.println("See also the presence of the file errors.txt");
         System.out.println("Using  mappers:");
-        int i=1;
+        int i = 1;
         for (Imap imap : MapFactory.getMaps()) {
-            System.out.println("\t"+i+". "+imap.getPrintedName() + "\t- " + imap.getDescription());
+            System.out.println("\t" + i + ". " + imap.getPrintedName() + "\t- " + imap.getDescription());
             i++;
         }
 

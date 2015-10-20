@@ -10,7 +10,7 @@ import java.util.TreeMap;
 /**
  * @author moroz
  */
-public class CosXCosYMap implements Imap {
+public class CosXCosYMap extends BaseMap{
 
     private TreeMap<Double, Double[]> data;
 
@@ -20,15 +20,9 @@ public class CosXCosYMap implements Imap {
 
     private static final String PRINTED_NAME = "cxcy";
 
-    private final boolean isprint;
-
     public CosXCosYMap() {
         data = new TreeMap<>();
-        isprint = Utils.getBoolProperty(PRINTED_NAME + ".print");
-    }
-
-    public boolean isPrint() {
-        return isprint;
+        print = Utils.getBoolProperty(PRINTED_NAME + ".print");
     }
 
     @Override
@@ -63,23 +57,20 @@ public class CosXCosYMap implements Imap {
     }
 
     @Override
-    public void write(String name) throws IOException {
+    public void writeBase(String name) throws IOException {
 
-        if (isPrint()) {
-            name = name != null ? name + "-w.txt" : getPrintedName() + "-w.txt";
+        try (BufferedWriter w = new BufferedWriter(new FileWriter(new File(name)))) {
 
-            try (BufferedWriter w = new BufferedWriter(new FileWriter(new File(name)))) {
+            Double cosYcosY = maxY / (maxX + maxY + maxZ);
+            Double cosXcosX = maxX / (maxX + maxY + maxZ);
 
-                Double cosYcosY = maxY / (maxX + maxY + maxZ);
-                Double cosXcosX = maxX / (maxX + maxY + maxZ);
+            w.append("cos(X)*cos(X)=")
+                    .append(cosXcosX.toString()).append(System.lineSeparator());
 
-                w.append("cos(X)*cos(X)=")
-                        .append(cosXcosX.toString()).append(System.lineSeparator());
-
-                w.append("cos(Y)*cos(Y)=")
-                        .append(cosYcosY.toString()).append(System.lineSeparator());
-            }
+            w.append("cos(Y)*cos(Y)=")
+                    .append(cosYcosY.toString()).append(System.lineSeparator());
         }
+
     }
 
 }
