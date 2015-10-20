@@ -10,18 +10,17 @@ import java.util.TreeMap;
  *
  * @author moroz
  */
-public class BaseMap implements Imap{
-    
+public class BaseMap implements Imap {
+
     private TreeMap<Double, Double[]> data;
-    
-    
-    public BaseMap(){
-        
+
+    public BaseMap() {
+
     }
-    
+
     @Override
     public void map(TreeMap<Double, Double[]> data) {
-        this.data=data;
+        this.data = data;
     }
 
     @Override
@@ -41,15 +40,15 @@ public class BaseMap implements Imap{
 
     @Override
     public void write(String name) throws IOException {
-      
-        name=name!=null?name+"-w.txt":"w.txt";
-        
+
+        name = name != null ? name + "-w.txt" : "w.txt";
+
         StringBuilder errors;
-        
+
         try (BufferedWriter w = new BufferedWriter(new FileWriter(new File(name)))) {
             errors = new StringBuilder();
             int i = 1;
-            for (Double frecuency :getData().keySet()) {
+            for (Double frecuency : getData().keySet()) {
                 Double[] vectors = getData().get(frecuency);
                 for (Double v : vectors) {
                     if (v == null) {
@@ -79,5 +78,5 @@ public class BaseMap implements Imap{
         }
 
     }
-    
+
 }

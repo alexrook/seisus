@@ -55,7 +55,7 @@ public class MaxVector2ColMap implements Imap {
 
     @Override
     public void write(String name) throws IOException {
-        name = name != null ? name + "-w.txt" : "w.txt";
+        name = name != null ? name + "-w.txt" : getPrintedName()+"-w.txt";
         StringBuilder errors;
         try (BufferedWriter w = new BufferedWriter(new FileWriter(new File(name)))) {
             errors = new StringBuilder();
