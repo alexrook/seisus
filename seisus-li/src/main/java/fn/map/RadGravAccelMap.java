@@ -6,7 +6,7 @@ import java.util.TreeMap;
 /**
  * @author moroz
  *
- * перевод частоты в радианы значений векторов - в доли ускорения свободного
+ * перевод частоты в радианы, значений векторов - в доли ускорения свободного
  * падения
  *
  */
@@ -23,15 +23,12 @@ public class RadGravAccelMap extends BaseMap {
         for (Double frecuency : data.keySet()) {
 
             Double[] vectors = data.get(frecuency);
-            Double[] newvec = new Double[3];
-            int i = 0;
             if (vectors != null) {
-                for (Double vector : vectors) {
-                    newvec[i] = vector / 9.81;
-                    i++;
+                for (int i = 0; i < vectors.length; i++) {
+                    vectors[i] = vectors[i] / 9.81;
                 }
             }
-            this.data.put(frecuency * 6.28, newvec);
+            this.data.put(frecuency * 6.28, vectors);
         }
     }
 
@@ -52,7 +49,7 @@ public class RadGravAccelMap extends BaseMap {
 
     @Override
     public void write(String name) throws IOException {
-        name = name != null ? name  : getPrintedName();
+        name = name != null ? name : getPrintedName();
         super.write(name);
     }
 
