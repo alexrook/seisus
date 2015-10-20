@@ -14,21 +14,18 @@ public class MaxVector2ColMap implements Imap {
     private final TreeMap<Double, Double[]> data;
 
     private int maxVectorCol = 0;
-    
-    
-    
-    public MaxVector2ColMap(){
-         data = new TreeMap<>();
+
+    public MaxVector2ColMap() {
+        data = new TreeMap<>();
     }
 
     @Override
     public void map(TreeMap<Double, Double[]> data) {
+        Double old = Double.MIN_VALUE;
         for (Double frecuency : data.keySet()) {
-
             Double[] vectors = data.get(frecuency);
             if (vectors != null) {
                 int i = 0;
-                Double old = Double.MIN_VALUE;
                 for (Double vector : vectors) {
                     if (vector > old) {
                         this.maxVectorCol = i;
@@ -37,7 +34,6 @@ public class MaxVector2ColMap implements Imap {
                     i++;
                 }
             }
-
             this.data.put(frecuency, vectors);
         }
     }
