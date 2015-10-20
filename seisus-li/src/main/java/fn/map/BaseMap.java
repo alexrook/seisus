@@ -1,5 +1,6 @@
 package fn.map;
 
+import fn.Utils;
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
@@ -14,8 +15,14 @@ public class BaseMap implements Imap {
 
     private TreeMap<Double, Double[]> data;
 
-    public BaseMap() {
+    private boolean isprint = true;
 
+    public BaseMap() {
+        isprint = Utils.getBoolProperty("w." + "print");
+    }
+
+    public boolean isPrint() {
+        return isprint;
     }
 
     @Override
@@ -43,40 +50,41 @@ public class BaseMap implements Imap {
 
         name = name != null ? name + "-w.txt" : "w.txt";
 
-        StringBuilder errors;
+        if (isPrint()) {
+            StringBuilder errors;
 
-        try (BufferedWriter w = new BufferedWriter(new FileWriter(new File(name)))) {
-            errors = new StringBuilder();
-            int i = 1;
-            for (Double frecuency : getData().keySet()) {
-                Double[] vectors = getData().get(frecuency);
-                for (Double v : vectors) {
-                    if (v == null) {
-                        errors.append("WARN ! frecuency:")
-                                .append(frecuency)
-                                .append(" contains empty values(line in file:")
-                                .append(i)
-                                .append(")\n");
+            try (BufferedWriter w = new BufferedWriter(new FileWriter(new File(name)))) {
+                errors = new StringBuilder();
+                int i = 1;
+                for (Double frecuency : getData().keySet()) {
+                    Double[] vectors = getData().get(frecuency);
+                    for (Double v : vectors) {
+                        if (v == null) {
+                            errors.append("WARN ! frecuency:")
+                                    .append(frecuency)
+                                    .append(" contains empty values(line in file:")
+                                    .append(i)
+                                    .append(")\n");
+                        }
                     }
+                    w.append(frecuency.toString());
+                    w.append("\t");
+                    w.append(vectors[0].toString());
+                    w.append("\t");
+                    w.append(vectors[1].toString());
+                    w.append("\t");
+                    w.append(vectors[2].toString());
+                    w.append(System.lineSeparator());
+                    i++;
                 }
-                w.append(frecuency.toString());
-                w.append("\t");
-                w.append(vectors[0].toString());
-                w.append("\t");
-                w.append(vectors[1].toString());
-                w.append("\t");
-                w.append(vectors[2].toString());
-                w.append(System.lineSeparator());
-                i++;
+            }
+
+            if (errors.length() > 0) {
+                try (FileWriter errorsf = new FileWriter("errors.txt")) {
+                    errorsf.write(errors.toString());
+                }
             }
         }
-
-        if (errors.length() > 0) {
-            try (FileWriter errorsf = new FileWriter("errors.txt")) {
-                errorsf.write(errors.toString());
-            }
-        }
-
     }
 
 }

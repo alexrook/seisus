@@ -1,5 +1,6 @@
 package fn.map;
 
+import fn.Utils;
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
@@ -17,8 +18,17 @@ public class CosXCosYMap implements Imap {
             maxY = Double.MIN_VALUE,
             maxZ = Double.MIN_VALUE;
 
+    private static final String PRINTED_NAME = "cxcy";
+
+    private final boolean isprint;
+
     public CosXCosYMap() {
         data = new TreeMap<>();
+        isprint = Utils.getBoolProperty(PRINTED_NAME + ".print");
+    }
+
+    public boolean isPrint() {
+        return isprint;
     }
 
     @Override
@@ -54,20 +64,22 @@ public class CosXCosYMap implements Imap {
 
     @Override
     public void write(String name) throws IOException {
-        name = name != null ? name + "-w.txt" : getPrintedName() + "-w.txt";
 
-        try (BufferedWriter w = new BufferedWriter(new FileWriter(new File(name)))) {
+        if (isPrint()) {
+            name = name != null ? name + "-w.txt" : getPrintedName() + "-w.txt";
 
-            Double cosYcosY = maxY / (maxX + maxY + maxZ);
-            Double cosXcosX = maxX / (maxX + maxY + maxZ);
+            try (BufferedWriter w = new BufferedWriter(new FileWriter(new File(name)))) {
 
-            w.append("cos(X)*cos(X)=")
-                    .append(cosXcosX.toString()).append(System.lineSeparator());
+                Double cosYcosY = maxY / (maxX + maxY + maxZ);
+                Double cosXcosX = maxX / (maxX + maxY + maxZ);
 
-            w.append("cos(Y)*cos(Y)=")
-                    .append(cosYcosY.toString()).append(System.lineSeparator());
+                w.append("cos(X)*cos(X)=")
+                        .append(cosXcosX.toString()).append(System.lineSeparator());
+
+                w.append("cos(Y)*cos(Y)=")
+                        .append(cosYcosY.toString()).append(System.lineSeparator());
+            }
         }
-
     }
 
 }

@@ -1,5 +1,6 @@
 package fn.map;
 
+import fn.Utils;
 import java.io.IOException;
 import java.util.TreeMap;
 
@@ -14,8 +15,18 @@ public class RadGravAccelMap extends BaseMap {
 
     private final TreeMap<Double, Double[]> data;
 
+    private static final String PRINTED_NAME = "rgam";
+
+    private final boolean isprint;
+
     public RadGravAccelMap() {
         data = new TreeMap<>();
+        isprint = Utils.getBoolProperty(PRINTED_NAME + ".print");
+    }
+
+    @Override
+    public boolean isPrint() {
+        return isprint;
     }
 
     @Override
@@ -39,7 +50,7 @@ public class RadGravAccelMap extends BaseMap {
 
     @Override
     public String getPrintedName() {
-        return "rgam";
+        return PRINTED_NAME;
     }
 
     @Override

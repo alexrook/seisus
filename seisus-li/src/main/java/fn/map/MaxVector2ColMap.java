@@ -1,5 +1,6 @@
 package fn.map;
 
+import fn.Utils;
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
@@ -15,8 +16,17 @@ public class MaxVector2ColMap implements Imap {
 
     private int maxVectorCol = 0;
 
+    private static final String PRINTED_NAME = "mv2c";
+
+    private final boolean isprint;
+
     public MaxVector2ColMap() {
         data = new TreeMap<>();
+        isprint = Utils.getBoolProperty(PRINTED_NAME + ".print");
+    }
+
+    public boolean isPrint() {
+        return isprint;
     }
 
     @Override
@@ -45,7 +55,7 @@ public class MaxVector2ColMap implements Imap {
 
     @Override
     public String getPrintedName() {
-        return "mv2c";
+        return PRINTED_NAME;
     }
 
     @Override
@@ -55,33 +65,36 @@ public class MaxVector2ColMap implements Imap {
 
     @Override
     public void write(String name) throws IOException {
-        name = name != null ? name + "-w.txt" : getPrintedName()+"-w.txt";
-        StringBuilder errors;
-        try (BufferedWriter w = new BufferedWriter(new FileWriter(new File(name)))) {
-            errors = new StringBuilder();
-            int i = 1;
-            for (Double frecuency : getData().keySet()) {
-                Double[] vectors = getData().get(frecuency);
-                for (Double v : vectors) {
-                    if (v == null) {
-                        errors.append("WARN ! frecuency:")
-                                .append(frecuency)
-                                .append(" contains empty values(line in file:")
-                                .append(i)
-                                .append(")\n");
-                    }
-                }
-                w.append(frecuency.toString());
-                w.append("\t");
-                w.append(vectors[this.maxVectorCol].toString());
-                w.append(System.lineSeparator());
-                i++;
-            }
-        }
+        if (isPrint()) {
+            name = name != null ? name + "-w.txt" : getPrintedName() + "-w.txt";
 
-        if (errors.length() > 0) {
-            try (FileWriter errorsf = new FileWriter("errors.txt")) {
-                errorsf.write(errors.toString());
+            StringBuilder errors;
+            try (BufferedWriter w = new BufferedWriter(new FileWriter(new File(name)))) {
+                errors = new StringBuilder();
+                int i = 1;
+                for (Double frecuency : getData().keySet()) {
+                    Double[] vectors = getData().get(frecuency);
+                    for (Double v : vectors) {
+                        if (v == null) {
+                            errors.append("WARN ! frecuency:")
+                                    .append(frecuency)
+                                    .append(" contains empty values(line in file:")
+                                    .append(i)
+                                    .append(")\n");
+                        }
+                    }
+                    w.append(frecuency.toString());
+                    w.append("\t");
+                    w.append(vectors[this.maxVectorCol].toString());
+                    w.append(System.lineSeparator());
+                    i++;
+                }
+            }
+
+            if (errors.length() > 0) {
+                try (FileWriter errorsf = new FileWriter("errors.txt")) {
+                    errorsf.write(errors.toString());
+                }
             }
         }
     }
