@@ -74,9 +74,9 @@ public class MaxVector2ColMap extends BaseMap {
                                 .append(")\n");
                     }
                 }
-                w.append(frecuency.toString());
+                w.append(getFormatNumber(frecuency));
                 w.append("\t");
-                w.append(vectors[this.maxVectorCol].toString());
+                w.append(getFormatNumber(vectors[this.maxVectorCol]));
                 w.append(System.lineSeparator());
                 i++;
             }

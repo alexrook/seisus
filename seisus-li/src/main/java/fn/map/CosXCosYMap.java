@@ -10,7 +10,7 @@ import java.util.TreeMap;
 /**
  * @author moroz
  */
-public class CosXCosYMap extends BaseMap{
+public class CosXCosYMap extends BaseMap {
 
     private TreeMap<Double, Double[]> data;
 
@@ -61,14 +61,17 @@ public class CosXCosYMap extends BaseMap{
 
         try (BufferedWriter w = new BufferedWriter(new FileWriter(new File(name)))) {
 
-            Double cosYcosY = maxY / (maxX + maxY + maxZ);
             Double cosXcosX = maxX / (maxX + maxY + maxZ);
+            Double cosYcosY = maxY / (maxX + maxY + maxZ);
+           
 
             w.append("cos(X)*cos(X)=")
-                    .append(cosXcosX.toString()).append(System.lineSeparator());
+                    .append(getFormatNumber(cosXcosX))
+                    .append(System.lineSeparator());
 
             w.append("cos(Y)*cos(Y)=")
-                    .append(cosYcosY.toString()).append(System.lineSeparator());
+                    .append(getFormatNumber(cosYcosY))
+                    .append(System.lineSeparator());
         }
 
     }

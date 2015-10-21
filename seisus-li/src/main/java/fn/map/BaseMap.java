@@ -5,6 +5,8 @@ import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.text.NumberFormat;
+import java.util.Locale;
 import java.util.TreeMap;
 
 /**
@@ -52,7 +54,7 @@ public class BaseMap implements Imap {
     }
 
     protected String createName(String name) {
-        return (name != null)&&(!name.equalsIgnoreCase("w")) ? name + "-w.txt" : getPrintedName() + ".txt";
+        return (name != null) && (!name.equalsIgnoreCase("w")) ? name + "-w.txt" : getPrintedName() + ".txt";
     }
 
     protected void writeBase(String name) throws IOException {
@@ -71,13 +73,13 @@ public class BaseMap implements Imap {
                                 .append(")\n");
                     }
                 }
-                w.append(frecuency.toString());
+                w.append(getFormatNumber(frecuency));
                 w.append("\t");
-                w.append(vectors[0].toString());
+                w.append(getFormatNumber(vectors[0]));
                 w.append("\t");
-                w.append(vectors[1].toString());
+                w.append(getFormatNumber(vectors[1]));
                 w.append("\t");
-                w.append(vectors[2].toString());
+                w.append(getFormatNumber(vectors[2]));
                 w.append(System.lineSeparator());
                 i++;
             }
@@ -87,6 +89,21 @@ public class BaseMap implements Imap {
                 errorsf.write(errors.toString());
             }
         }
+
+    }
+
+    public String getFormatNumber(Double num) {
+        NumberFormat numberFormUS = NumberFormat.getInstance(Locale.US);
+
+        try {
+            String numFract = Utils.getHierProperty(getPrintedName() + ".print.maxfd");
+            if (numFract != null) {
+                numberFormUS.setMaximumFractionDigits(Integer.parseInt(numFract));
+            }
+        } catch (NumberFormatException e) {
+        }
+
+        return numberFormUS.format(num);
 
     }
 

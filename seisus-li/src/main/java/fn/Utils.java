@@ -30,7 +30,7 @@ public class Utils {
         try {
             data.load(new FileInputStream(APP_CFG_NAME));
         } catch (IOException ex) {
-            
+
         }
 
     }
@@ -53,6 +53,17 @@ public class Utils {
         String val = getProperty(name);
         boolean result = val != null ? val.matches("([Yy]es|[Tt]rue)") : false;
         return result;
+    }
+
+    public static String getHierProperty(String name) {
+        String val = getProperty(name);
+        if ((val == null) && (name.contains("."))) {
+            if ((name.indexOf(".") + 1) < (name.length())) {
+                return getHierProperty(name.substring(name.indexOf(".") + 1));
+            }
+        }
+        return val;
+
     }
 
     static {
