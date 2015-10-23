@@ -61,9 +61,22 @@ public class CosXCosYMap extends BaseMap {
 
         try (BufferedWriter w = new BufferedWriter(new FileWriter(new File(name)))) {
 
-            Double cosXcosX = maxX / (maxX + maxY + maxZ);
+            Double cosXcosX
+                    = maxX / (maxX + maxY + maxZ);
+
+            Double sqrtCosX = Math.sqrt(cosXcosX);
+
             Double cosYcosY = maxY / (maxX + maxY + maxZ);
-           
+
+            Double sqrtCosY = Math.sqrt(cosYcosY);
+
+            w.append("cos(X)=")
+                    .append(getFormatNumber(sqrtCosX))
+                    .append(System.lineSeparator());
+
+            w.append("cos(Y)=")
+                    .append(getFormatNumber(sqrtCosY))
+                    .append(System.lineSeparator());
 
             w.append("cos(X)*cos(X)=")
                     .append(getFormatNumber(cosXcosX))
@@ -72,6 +85,7 @@ public class CosXCosYMap extends BaseMap {
             w.append("cos(Y)*cos(Y)=")
                     .append(getFormatNumber(cosYcosY))
                     .append(System.lineSeparator());
+
         }
 
     }

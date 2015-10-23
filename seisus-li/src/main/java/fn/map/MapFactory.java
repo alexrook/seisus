@@ -11,9 +11,9 @@ public class MapFactory {
 
         LinkedHashSet<Imap> result = new LinkedHashSet();
         result.add(new BaseMap()); //печать без преобразования
-        result.add(new RadGravAccelMap()); //частота в радианы.сек, векторы в доли от 'g'
+        result.add(new RadGravAccelMap()); //частота в радианы/сек, векторы в доли от 'g'
         result.add(new MaxVector2ColMap());//найти max vector в колонках и напечатать эту колоку наряду с частотой
-        result.add(new CosXCosYMap()); // посчитать Ymax/(Xmax+Ymax+Zmax) и Xmax/(Xmax+Ymax+Zmax)
+        result.add(new CosXCosYMap()); // посчитать Ymax/(Xmax+Ymax+Zmax) и Xmax/(Xmax+Ymax+Zmax) и sqrt от этих значений
         return result;
     }
 
